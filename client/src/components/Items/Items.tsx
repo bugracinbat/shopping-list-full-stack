@@ -6,12 +6,8 @@ import {
   IconButton,
   Checkbox,
   CircularProgress,
-  Dialog,
-  DialogTitle,
-  DialogContent,
   DialogActions,
 } from "@mui/material";
-import React from "react";
 import styled from "styled-components";
 import {
   CartItem,
@@ -19,10 +15,11 @@ import {
   setSelectedId,
   setShowDeleteDialog,
   setShowForm,
-} from "./shoppingListSlice";
+} from "../../features/shoppingList/shoppingListSlice";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import Modal from "../Modal/Modal";
 
 const StyledEmptyShoppingCartContainer = styled(Grid)`
   border: 1px solid #c6c6c6;
@@ -64,9 +61,6 @@ const ShoppingListItems = ({ items }: { items: CartItem[] }) => {
   const handleDeleteClick = (id: string) => {
     dispatch(setShowDeleteDialog(true));
     dispatch(setSelectedId(id));
-
-    // dispatch(deleteItem(id));
-    console.log(id);
   };
 
   const handleAddClick = () => {
@@ -94,32 +88,28 @@ const ShoppingListItems = ({ items }: { items: CartItem[] }) => {
 
   const DeleteModal = () => {
     return (
-      <Dialog
+      <Modal
         open={showDeleteDialog}
-        fullWidth
+        title="Delete Item?"
         onClose={() => dispatch(setShowDeleteDialog(false))}
-      >
-        <DialogTitle id="id">
-          <Typography variant="h6">Delete Item?</Typography>
-        </DialogTitle>
-        <DialogContent>
-          Are you sure you want to delete this item? This can not be undone.
-        </DialogContent>
-        <DialogActions>
-          <Button
-            variant="outlined"
-            onClick={() => dispatch(setShowDeleteDialog(false))}
-          >
-            Cancel
-          </Button>
-          <Button
-            variant="contained"
-            onClick={() => dispatch(deleteItem(selectedId))}
-          >
-            Delete
-          </Button>
-        </DialogActions>
-      </Dialog>
+        content="Are you sure you want to delete this item? This can not be undone."
+        actions={
+          <>
+            <Button
+              variant="outlined"
+              onClick={() => dispatch(setShowDeleteDialog(false))}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              onClick={() => dispatch(deleteItem(selectedId))}
+            >
+              Delete
+            </Button>
+          </>
+        }
+      />
     );
   };
 

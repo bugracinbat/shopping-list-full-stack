@@ -13,9 +13,13 @@ import {
 import { useEffect, useState } from "react";
 
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { createItem, setShowForm, updateItem } from "./shoppingListSlice";
+import {
+  createItem,
+  setShowForm,
+  updateItem,
+} from "../../features/shoppingList/shoppingListSlice";
 
-const ItemForm = () => {
+const ShoppingItemForm = () => {
   const [values, setValues] = useState({
     id: "",
     name: "",
@@ -140,4 +144,4 @@ const ItemForm = () => {
   );
 };
 
-export default ItemForm;
+export default ShoppingItemForm;
