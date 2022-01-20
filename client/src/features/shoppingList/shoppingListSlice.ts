@@ -32,16 +32,24 @@ const initialState: ShoppingListState = {
 export const fetchItems = createAsyncThunk(
   "shoppingList/fetchItems",
   async () => {
-    const response = await api.getItems();
-    return response.data;
+    try {
+      const response = await api.getItems();
+      return response.data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
 export const createItem = createAsyncThunk(
   "shoppingList/createItem",
   async (item: any) => {
-    const { data } = await api.createItem(item);
-    return data;
+    try {
+      const { data } = await api.createItem(item);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
   }
 );
 
