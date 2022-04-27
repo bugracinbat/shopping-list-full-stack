@@ -1,4 +1,6 @@
-# full stack shopping list application built with react, typescript, redux-toolkit, express, mongodb and more
+# Full-Stack Shopping List App 
+
+built with react, typescript, redux-toolkit, express, mongodb and more
 
 Can run both server/client via npm start in each project.
 
